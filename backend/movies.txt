@@ -1,0 +1,400 @@
+Mohabbatein,2000
+Kaho Naa... Pyaar Hai,2000
+Mission Kashmir,2000
+Dulhan Hum Le Jayenge,2000
+Refugee,2000
+Josh,2000
+Har Dil Jo Pyar Karega,2000
+Fiza,2000
+Hamara Dil Aapke Paas Hai,2000
+Mela,2000
+Kabhi Khushi Kabhie Gham...,2001
+Gadar: Ek Prem Katha,2001
+Lagaan,2001
+Indian,2001
+Dil Chahta Hai,2001
+Chori Chori Chupke Chupke,2001
+Ek Rishtaa: The Bond of Love,2001
+Yaadein,2001
+Lajja,2001
+Jodi No.1,2001
+Devdas,2002
+Kaante,2002
+Raaz,2002
+Hum Tumhare Hain Sanam,2002
+Aankhen,2002
+Mujhse Dosti Karoge!,2002
+Humraaz,2002
+Saathiya,2002
+Awara Paagal Deewana,2002
+Company,2002
+Kal Ho Naa Ho,2003
+Koi... Mil Gaya,2003
+The Hero: Love Story of a Spy,2003
+Chalte Chalte,2003
+Baghban,2003
+Main Prem Ki Diwani Hoon,2003
+Munna Bhai M.B.B.S.,2003
+LOC: Kargil,2003
+Andaaz,2003
+Qayamat: City Under Threat,2003
+Veer-Zaara,2004
+Main Hoon Na,2004
+Dhoom,2004
+Mujhse Shaadi Karogi,2004
+Khakee,2004
+Hum Tum,2004
+Swades,2004
+Murder,2004
+Hulchul,2004
+Aitraaz,2004
+No Entry,2005
+Bunty Aur Babli,2005
+Salaam Namaste,2005
+Garam Masala,2005
+Mangal Pandey: The Rising,2005
+Maine Pyaar Kyun Kiya?,2005
+Waqt: The Race Against Time,2005
+Black,2005
+Sarkar,2005
+Dus,2005
+Dhoom 2,2006
+Krrish,2006
+Lage Raho Munna Bhai,2006
+Kabhi Alvida Naa Kehna,2006
+Don,2006
+Fanaa,2006
+Rang De Basanti,2006
+Phir Hera Pheri,2006
+Vivah,2006
+Om Shanti Om,2007
+Welcome,2007
+Chak De! India,2007
+Partner,2007
+Taare Zameen Par,2007
+Heyy Babyy,2007
+Guru,2007
+Bhool Bhulaiyaa,2007
+Namastey London,2007
+Ta Ra Rum Pum,2007
+Ghajini,2008
+Rab Ne Bana Di Jodi,2008
+Singh Is Kinng,2008
+Jodhaa Akbar,2008
+Race,2008
+Golmaal Returns,2008
+Dostana,2008
+Bachna Ae Haseeno,2008
+Bhoothnath,2008
+Sarkar Raj,2008
+3 Idiots,2009
+Love Aaj Kal,2009
+Ajab Prem Ki Ghazab Kahani,2009
+Wanted,2009
+Kambakkht Ishq,2009
+De Dana Dan,2009
+New York,2009
+Kaminey,2009
+Blue,2009
+Chandni Chowk To China,2009
+My Name Is Khan,2010
+Dabangg,2010
+Golmaal 3,2010
+Raajneeti,2010
+Housefull,2010
+Tees Maar Khan,2010
+Once Upon A Time In Mumbaai,2010
+I Hate Luv Storys,2010
+Anjaana Anjaani,2010
+Atithi Tum Kab Jaoge?,2010
+Bodyguard,2011
+Ra.One,2011
+Don 2,2011
+Ready,2011
+Zindagi Na Milegi Dobara,2011
+Singham,2011
+The Dirty Picture,2011
+Rockstar,2011
+Murder 2,2011
+Delhi Belly,2011
+Ek Tha Tiger,2012
+Dabangg 2,2012
+Jab Tak Hai Jaan,2012
+Rowdy Rathore,2012
+Agneepath,2012
+Barfi!,2012
+Talaash: The Answer Lies Within,2012
+Housefull 2,2012
+Bol Bachchan,2012
+Son of Sardaar,2012
+Dhoom 3,2013
+Chennai Express,2013
+Krrish 3,2013
+Yeh Jawaani Hai Deewani,2013
+Aashiqui 2,2013
+Goliyon Ki Raasleela Ram-Leela,2013
+Vishwaroopam,2013
+Bhaag Milkha Bhaag,2013
+Race 2,2013
+Raanjhanaa,2013
+Grand Masti,2013
+PK,2014
+Kick,2014
+Happy New Year,2014
+Bang Bang!,2014
+Singham Returns,2014
+Jai Ho,2014
+Holiday: A Soldier Is Never Off Duty,2014
+2 States,2014
+Ek Villain,2014
+Gunday,2014
+Bajrangi Bhaijaan,2015
+Prem Ratan Dhan Payo,2015
+Dilwale,2015
+Bajirao Mastani,2015
+Tanu Weds Manu: Returns,2015
+Welcome Back,2015
+ABCD 2,2015
+Drishyam,2015
+Dil Dhadakne Do,2015
+Baby,2015
+Dangal,2016
+Sultan,2016
+Ae Dil Hai Mushkil,2016
+Rustom,2016
+M.S. Dhoni: The Untold Story,2016
+Airlift,2016
+Housefull 3,2016
+Fan,2016
+Shivaay,2016
+Dear Zindagi,2016
+Sanam Teri Kasam,2016
+Kapoor & Sons,2016
+Befikre,2016
+Fitoor,2016
+Neerja,2016
+Pink,2016
+Dishoom,2016
+Azhar,2016
+Mohenjo Daro,2016
+Raman Raghav 2.0,2016
+1920 London,2016
+Baaghi,2016
+Ki & Ka,2016
+Gurgaon,2016
+Ghayal Once Again,2016
+Veerappan,2016
+Secret Superstar,2017
+Tiger Zinda Hai,2017
+Hindi Medium,2017
+Toilet: Ek Prem Katha,2017
+Golmaal Again,2017
+Raees,2017
+Judwaa 2,2017
+Tubelight,2017
+Kaabil,2017
+Badrinath Ki Dulhania,2017
+Jagga Jasoos,2017
+Jab Harry Met Sejal,2017
+Shubh Mangal Savdhaan,2017
+Jolly LLB 2,2017
+Bareilly ki Barfi,2017
+Fukrey Returns,2017
+Haseena Parker,2017
+Toilet: Ek Prem Katha,2017
+Ok Jaanu,2017
+Naam Shabana,2017
+Meri Pyaari Bind,2017
+Commando 2: The Black Money Trail,2017
+Munna Micheal,2017
+Ghazi,2017
+Mubarakan,2017
+Sachin: A Billion Dreams,2017
+Machine,2017
+A Gentleman,2017
+Qarib Qarib Single,2017
+Mukkabaaz,2017
+Sanju,2018
+Padmaavat,2018
+Andhadhun,2018
+Simmba,2018
+Thugs of Hindostan,2018
+Race 3,2018
+Baaghi 2,2018
+Hichki,2018
+Badhaai Ho,2018
+Pad Man,2018
+Zero,2019
+Veere Di Wedding,2018
+Karwaan,2018
+Kedarnath,2018
+Gold,2018
+October,2018
+Raid,2018
+Batti Gul Meter Chalu,2018
+Satyameva Jayate,2018
+Sui Dhaaga,2018
+Laila Majnu,2018
+Raazi,2018
+Aiyaary,2018
+Parmanu: The Story Of Pokhran,2018
+Genius,2018
+Kaashi in Search of Ganga,2018
+Yamla Pagla Deewana: Phir Se,2018
+Bhavesh Joshi Superhero,2018
+Namaste England,2018
+Nawabzaade,2018
+2.0,2018
+Stree,2018
+102 Not Out,2018
+Manmarziyaan,2018
+War,2019
+Saaho,2019
+Kabir Singh,2019
+Uri: The Surgical Strike,2019
+Bharat,2019
+Good Newwz,2019
+Housefull 4,2019
+Mission Mangal,2019
+Gully Boy,2019
+Dabangg 3,2019
+The Sky Is Pink,2019
+Kalank,2019
+Student Of The Year 2,2019
+Chhichhore,2019
+Super 30,2019
+Dream Girl,2019
+Section 375,2019
+Bala,2019
+De De Pyaar De,2019
+Luka Chuppi,2019
+Marjaavaan,2019
+Pagalpanti,2019
+Jabariya Jodi,2019
+Pal Pal Dil Ke Paas,2019
+Pati Patni Aur Woh,2019
+Kesari,2019
+Total Dhamaal,2019
+Made In China,2019
+Junglee,2019
+Ujda Chaman,2019
+Batla House,2019
+Mardaani 2,2019
+Commando 3,2019
+Romeo Akbar Walter,2019
+Tanhaji,2020
+Baaghi 3,2020
+Street Dancer 3D,2020
+Shubh Mangal Zyada Saavdhan,2020
+Malang,2020
+Chhapaak,2020
+Love Aaj Kal,2020
+Jawaani Jaaneman,2020
+Thappad,2020
+Panga,2020
+Dil Bechara,2020
+Laxmii,2020
+Angrezi Medium,2020
+Chhalaang,2020
+Hacked,2020
+Lootcase,2020
+Chaman Bahaar,2020
+Coolie No. 1,2020
+Gulabo Sitabo,2020
+Yaara,2020
+Soorarai Pottru,2020
+Sooryavanshi,2021
+83,2021
+Antim: The Final Truth,2021
+Bell Bottom,2021
+Chandigarh Kare Aashiqui,2021
+Tadap,2021
+Roohi,2021
+Mumbai Saga,2021
+Bunty Aur Babli 2,2021
+Radhe,2021
+Hungama 2,2021
+Hum Do Humare Do,2021
+Shershah,2021
+Atrangi Re,2021
+Toofan,2021
+Shiddat,2021
+Bhuj: The Pride of India,2021
+Satyameva Jayate 2,2021
+Sardar Udham,2021
+Big Bull,2021
+Jay Bhim,2021
+Squad,2021
+Brahmastra: Part One - Shiva,2022
+Drishyam 2,2022
+The Kashmir Files,2022
+Bhool Bhulaiyaa 2,2022
+Gangubai Kathiawadi,2022
+Radhe Shyam,2022
+Jugjugg Jeeyo,2022
+Vikram Vedha,2022
+Laal Singh Chaddha,2022
+Ram Setu,2022
+Liger,2022
+Gehraiyaan,2022
+Bachchhan Pandey,2022
+Govind Naam Mera,2022
+Jersey,2022
+Attack: Part 1,2022
+Runway 34,2022
+Rocket Gang,2022
+Thank God,2022
+Raksha Bandhan,2022
+Babli Bouncer,2022
+Cuttputlli,2022
+Heropanti 2,2022
+Freddy,2022
+Janhit Mein Jari,2022
+Shamshera,2022
+A Thursday,2022
+Khuda Haafiz,2022
+K.G.F. Chapter 2,2022
+RRR,2022
+Jawan,2023
+Pathaan,2023
+Animal,2023
+Gadar 2,2023
+Dunki,2023
+Tiger 3,2023
+Rocky Aur Raani Kii Prem Kahani,2023
+Adipurush,2023
+The Kerala Story,2023
+OMG 2,2023
+ 12th Fail,2023
+Kisi Ka Bhai Kisi Ki Jaan,2023
+Satyaprem Ki Katha,2023
+Selfiee,2023
+Bholaa,2023
+Fukrey 3,2023
+Ghoomer,2023
+IB71,2023
+Bawaal,2023
+Farrey,2023
+Sirf Ek Bandaa Kaafi Hai,2023
+Dry Day,2023
+Pippa,2023
+Tejas,2023
+Kanjoos Makhichoos,2023
+Haddi,2023
+Dream Girl 2,2023
+Fighter,2024
+Shaitaan,2024
+Crew,2024
+Teri Baaton Mein Aisa Uljha Jiya,2024
+Article 370,2024
+Bade Miyaan Chhote Miyaan,2024
+Maidaan,2024
+Mr. & Mrs. Mahi,2024
+Srikanth,2024
+Madgaon Express,2024
+Swatantrya Veer Savarkar,2024
+Main Atal Hoon,2024
+Emergency,2024
+Operation Valentine,2024
+Amar Singh Chamkila,2024
+Murder Mubarak,2024
