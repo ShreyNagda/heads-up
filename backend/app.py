@@ -34,5 +34,5 @@ def getCricketers():
     random_cricketers = random.sample(cricketersList, n)
     return jsonify(random_cricketers)
 
-if (__name__ == "__main__"):
-    app.run(port=5000, debug=True)
+# if (__name__ == "__main__"):
+#     app.run(port=5000, debug=True)
