@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heads_up/game.dart';
 
 class CategoryCard extends StatelessWidget {
   final String text;
@@ -8,7 +9,14 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print("Go to ${text.toLowerCase()}");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GamePage(
+              type: text.toLowerCase(),
+            ),
+          ),
+        );
       },
       child: Container(
         width: 200,
