@@ -11,6 +11,17 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   @override
   void initState() {
+    switch (widget.type) {
+      case "cricketers":
+        print("Crickets");
+        break;
+      case "movies":
+        print("movies");
+        break;
+      case "words":
+        print("words");
+        break;
+    }
     super.initState();
   }
 

@@ -1,3 +1,5 @@
-String cricketersURL = "https://heads-up-jxhg.onrender.com/cricketers?n=";
-String wordsURL = "https://heads-up-jxhg.onrender.com/words?n=";
-String moviesURL = "https://heads-up-jxhg.onrender.com/movies?n=";
+String cricketersURL = "${baseURL}cricketers?n=";
+String wordsURL = "${baseURL}words?n=";
+String moviesURL = "${baseURL}movies?n=";
+
+String baseURL = "https://heads-up-jxhg.onrender.com/";
