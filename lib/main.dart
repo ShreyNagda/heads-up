@@ -33,7 +33,7 @@ class TiltCheck extends StatefulWidget {
 
 class _TiltCheckState extends State<TiltCheck> {
   double _z = 0.0;
-  double threshhold = 6.0;
+  double threshhold = 7.0;
   @override
   void initState() {
     super.initState();
@@ -47,14 +47,14 @@ class _TiltCheckState extends State<TiltCheck> {
 
   @override
   Widget build(BuildContext context) {
-    String tiltStatus;
+    String? tiltStatus;
 
     if (_z > threshhold) {
       tiltStatus = "Phone tilted up";
+      print("Correct");
     } else if (_z < -threshhold) {
       tiltStatus = "Phone tilted down";
-    } else {
-      tiltStatus = "No tilt";
+      print("Pass");
     }
 
     return Scaffold(
@@ -66,7 +66,7 @@ class _TiltCheckState extends State<TiltCheck> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              tiltStatus,
+              tiltStatus ?? "",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],

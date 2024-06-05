@@ -9,7 +9,10 @@ def home():
 #Random Words
 @main_bp.route("/words", methods=["GET"])
 def getWords():
-    n = int(request.args["n"]) or 5
+    if(request.args != None):
+        n = int(request.args["n"])
+    else:
+        n = 5
     with open('objects.txt', "r", encoding='utf-8') as file:
         words_list = [line.strip() for line in file]
     random_words = random.sample(words_list, n)
@@ -18,7 +21,10 @@ def getWords():
 #Random Movies
 @main_bp.route("/movies",methods=['GET'])
 def getMovies():
-    n = int(request.args["n"]) or 5
+    if(request.args != None):
+        n = int(request.args["n"])
+    else:
+        n = 5
     with open("movies.txt", "r", encoding="utf-8") as file:
         movies_list = [line.strip() for line in file]
     random_movies = random.sample(movies_list, n)
@@ -26,7 +32,10 @@ def getMovies():
 
 @main_bp.route("/cricketers")
 def getCricketers():
-    n = int(request.args["n"]) or 5
+    if(request.args != None):
+        n = int(request.args["n"])
+    else:
+        n = 5
     with open('cricketers.txt', "r", encoding='utf-8') as file:
         cricketersList = [line.strip() for line in file]
     random_cricketers = random.sample(cricketersList, n)
