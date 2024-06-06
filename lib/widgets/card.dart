@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:heads_up/Utils/colors.dart';
 import 'package:heads_up/game.dart';
 
 class CategoryCard extends StatelessWidget {
   final String text;
-  const CategoryCard({super.key, required this.text});
+  final String type;
+  const CategoryCard({super.key, required this.text, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class CategoryCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => GamePage(
-              type: text.toLowerCase(),
+              type: type.toLowerCase(),
             ),
           ),
         );
@@ -22,8 +24,9 @@ class CategoryCard extends StatelessWidget {
         width: 200,
         height: 200,
         decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(10)),
+          color: secondary,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -33,7 +36,7 @@ class CategoryCard extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 30,
-                color: Colors.white,
+                color: primary,
               ),
             ),
           ),

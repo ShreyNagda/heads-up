@@ -1,4 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:heads_up/Utils/colors.dart';
+import 'package:heads_up/Utils/globals.dart';
+import 'package:heads_up/game_over.dart';
+import 'package:http/http.dart' as http;
+import 'package:sensors_plus/sensors_plus.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 
 class GamePage extends StatefulWidget {
   final String type;
@@ -9,26 +19,209 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
+  String? url;
+  String? error;
+
+  bool canVibrate = true;
+
+  double _z = 0.0;
+  double threshhold = 8.0;
+  double resetThreshold = 0.5;
+
+  StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
+
+  bool loading = true;
+
+  int loadingSeconds = 5;
+  int gameSeconds = 60;
+
+  int index = 0;
+
+  String message = "";
+
+  Map<int, bool> scoreMap = {};
+  bool indexIncremented = false;
+
+  late List list = [];
+
+  Future<void> setupHaptics() async {
+    canVibrate = await Vibrate.canVibrate;
+  }
+
+  void setupAccelerometer() {
+    _accelerometerSubscription =
+        accelerometerEventStream(samplingPeriod: SensorInterval.gameInterval)
+            .listen((event) async {
+      setState(() {
+        _z = event.z;
+      });
+      if (_z.abs() > threshhold && !indexIncremented) {
+        Vibrate.feedback(FeedbackType.heavy);
+      }
+    });
+  }
+
+  void setupGameTimer() {
+    Timer.periodic(const Duration(seconds: 1), (_) {
+      setState(() {
+        gameSeconds--;
+      });
+      if (gameSeconds <= 0) {
+        _.cancel();
+      }
+    });
+  }
+
   @override
   void initState() {
+    setupHaptics();
     switch (widget.type) {
       case "cricketers":
-        print("Crickets");
+        url = cricketersURL;
         break;
       case "movies":
-        print("movies");
+        url = moviesURL;
         break;
       case "words":
-        print("words");
+        url = wordsURL;
         break;
     }
+    if (url != null) {
+      url = "$url?n=20";
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        var uri = Uri.parse(url!);
+        var res = await http.get(uri);
+        list = json.decode(res.body)["value"];
+        setState(() {
+          loading = false;
+        });
+      });
+    } else {
+      error = "Invalid URL";
+    }
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!loading) {
+        setState(() {
+          loadingSeconds--;
+        });
+      }
+      if (loadingSeconds < 0) {
+        timer.cancel();
+        setupHaptics();
+        setupAccelerometer();
+        setupGameTimer();
+      }
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (list.length - index == 3) {
+      var uri = Uri.parse(url!);
+      http.get(uri).then(
+            (res) => {
+              list.addAll(json.decode(res.body)["value"]),
+            },
+          );
+    }
+
+    if (_z > threshhold && message == "") {
+      scoreMap[index] = false;
+      message = "Pass";
+      if (!indexIncremented && index < list.length) {
+        index++;
+        indexIncremented = true;
+      }
+    } else if (_z < -threshhold && message == '') {
+      scoreMap[index] = true;
+      message = "Correct";
+      if (!indexIncremented && index < list.length) {
+        index++;
+        indexIncremented = true;
+      }
+    }
+    if (indexIncremented == true &&
+        _z < resetThreshold &&
+        _z > -resetThreshold) {
+      indexIncremented = false;
+      message = "";
+    }
+
     return LayoutBuilder(builder: (context, constraints) {
-      return const Scaffold();
+      //Data is loading
+      if (loading) {
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(
+              color: secondary,
+            ),
+          ),
+        );
+      }
+
+      //Initial Loading 3 seconds
+      if (loadingSeconds > 0) {
+        return Scaffold(
+          body: Center(
+            child: Text(
+              "Game Starts in $loadingSeconds seconds",
+              style: const TextStyle(fontSize: 24),
+            ),
+          ),
+        );
+      }
+
+      //Game over when gameSeconds < 0
+      if (gameSeconds <= 0) {
+        _accelerometerSubscription?.cancel();
+        // print(scoreMap);
+        return GameOver(
+          list: list,
+          scoreMap: scoreMap,
+          type: widget.type,
+        );
+      }
+
+      //Game loop
+      return Scaffold(
+        body: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: !indexIncremented
+                  ? Text(
+                      list[index],
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 60),
+                    )
+                  : Container(
+                      decoration: BoxDecoration(
+                        color: message == "Correct" ? Colors.green : Colors.red,
+                      ),
+                      width: constraints.maxWidth,
+                      height: constraints.maxHeight,
+                      child: Center(
+                        child: Text(
+                          message,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                    ),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Text(
+                "$gameSeconds seconds",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+          ],
+        ),
+      );
     });
   }
 }

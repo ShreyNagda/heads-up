@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heads_up/Utils/colors.dart';
 import 'package:heads_up/widgets/card.dart';
 
 class Home extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomeState extends State<Home> {
       builder: (context, constraints) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: secondary,
             centerTitle: true,
             shape: const ContinuousRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -27,7 +28,7 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w700,
-                color: Colors.white,
+                color: primary,
               ),
             ),
           ),
@@ -39,9 +40,9 @@ class _HomeState extends State<Home> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CategoryCard(text: "Cricketers"),
-                    CategoryCard(text: "Bollywood Movies"),
-                    CategoryCard(text: "Objects")
+                    CategoryCard(text: "Cricketers", type: "cricketers"),
+                    CategoryCard(text: "Bollywood Movies", type: "movies"),
+                    CategoryCard(text: "Objects", type: "words"),
                   ],
                 ),
               ),
