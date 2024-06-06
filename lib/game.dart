@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:heads_up/Utils/colors.dart';
 import 'package:heads_up/Utils/globals.dart';
 import 'package:heads_up/game_over.dart';
