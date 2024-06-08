@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:heads_up/Utils/globals.dart';
 import 'package:heads_up/Utils/theme.dart';
 import 'package:heads_up/homepage.dart';
-import 'package:sensors_plus/sensors_plus.dart';
+import 'package:heads_up/widgets/loading.dart';
+import 'package:http/http.dart' as http;
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,67 +14,40 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: CustomTheme.lightTheme,
-      home: const Home(),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class TiltCheck extends StatefulWidget {
-  const TiltCheck({super.key});
-
-  @override
-  _TiltCheckState createState() => _TiltCheckState();
-}
-
-class _TiltCheckState extends State<TiltCheck> {
-  double _z = 0.0;
-  double threshhold = 7.0;
+class _MyAppState extends State<MyApp> {
+  bool loading = true;
   @override
   void initState() {
+    http.get(Uri.parse(baseURL)).then((res) => {
+          if (res.statusCode == 200)
+            {
+              setState(() {
+                loading = false;
+              })
+            }
+        });
     super.initState();
-    // ignore: deprecated_member_use
-    accelerometerEvents.listen((AccelerometerEvent event) {
-      setState(() {
-        _z = event.z;
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    String? tiltStatus;
-
-    if (_z > threshhold) {
-      tiltStatus = "Phone tilted up";
-      print("Correct");
-    } else if (_z < -threshhold) {
-      tiltStatus = "Phone tilted down";
-      print("Pass");
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tilt Check'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              tiltStatus ?? "",
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ],
-        ),
-      ),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: CustomTheme.lightTheme,
+          home: loading
+              ? const Loading(text: "Fetching information")
+              : const Home(),
+        );
+      },
     );
   }
 }

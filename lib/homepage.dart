@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heads_up/Utils/colors.dart';
+import 'package:heads_up/Utils/text.dart';
 import 'package:heads_up/widgets/card.dart';
 
 class Home extends StatefulWidget {
@@ -16,20 +16,9 @@ class _HomeState extends State<Home> {
       builder: (context, constraints) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: secondary,
-            centerTitle: true,
-            shape: const ContinuousRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(30),
-              ),
-            ),
-            title: const Text(
+            title: Text(
               "Heads Up",
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w700,
-                color: primary,
-              ),
+              style: titlePrimary,
             ),
           ),
           body: const Column(

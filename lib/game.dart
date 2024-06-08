@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:heads_up/Utils/colors.dart';
 import 'package:heads_up/Utils/globals.dart';
+import 'package:heads_up/Utils/text.dart';
 import 'package:heads_up/game_over.dart';
+import 'package:heads_up/widgets/game_heading.dart';
+import 'package:heads_up/widgets/loading.dart';
 import 'package:http/http.dart' as http;
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
@@ -127,24 +129,21 @@ class _GamePageState extends State<GamePage> {
           );
     }
 
-    if (_z > threshhold && message == "") {
-      scoreMap[index] = false;
-      message = "Pass";
-      if (!indexIncremented && index < list.length) {
-        index++;
-        indexIncremented = true;
+    if (_z.abs() > threshhold && message == "") {
+      if (_z > threshhold) {
+        scoreMap[index] = false;
+        message = "Pass";
+      } else {
+        scoreMap[index] = true;
+        message = "Correct";
       }
-    } else if (_z < -threshhold && message == '') {
-      scoreMap[index] = true;
-      message = "Correct";
       if (!indexIncremented && index < list.length) {
         index++;
         indexIncremented = true;
       }
     }
-    if (indexIncremented == true &&
-        _z < resetThreshold &&
-        _z > -resetThreshold) {
+
+    if (indexIncremented == true && _z.abs() < resetThreshold) {
       indexIncremented = false;
       message = "";
     }
@@ -152,12 +151,8 @@ class _GamePageState extends State<GamePage> {
     return LayoutBuilder(builder: (context, constraints) {
       //Data is loading
       if (loading) {
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(
-              color: secondary,
-            ),
-          ),
+        return const Loading(
+          text: "Loading Data",
         );
       }
 
@@ -167,7 +162,7 @@ class _GamePageState extends State<GamePage> {
           body: Center(
             child: Text(
               "Game Starts in $loadingSeconds seconds",
-              style: const TextStyle(fontSize: 24),
+              style: bodyLarge,
             ),
           ),
         );
@@ -176,7 +171,6 @@ class _GamePageState extends State<GamePage> {
       //Game over when gameSeconds < 0
       if (gameSeconds <= 0) {
         _accelerometerSubscription?.cancel();
-        // print(scoreMap);
         return GameOver(
           list: list,
           scoreMap: scoreMap,
@@ -191,10 +185,9 @@ class _GamePageState extends State<GamePage> {
             Align(
               alignment: Alignment.center,
               child: !indexIncremented
-                  ? Text(
-                      list[index],
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 60),
+                  ? GameDisplay(
+                      type: widget.type,
+                      text: list[index],
                     )
                   : Container(
                       decoration: BoxDecoration(
@@ -206,7 +199,7 @@ class _GamePageState extends State<GamePage> {
                         child: Text(
                           message,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: subtitleWhite,
                         ),
                       ),
                     ),
@@ -215,7 +208,7 @@ class _GamePageState extends State<GamePage> {
               alignment: Alignment.topCenter,
               child: Text(
                 "$gameSeconds seconds",
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: bodyMedium,
               ),
             ),
           ],

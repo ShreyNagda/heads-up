@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
-import 'package:heads_up/Utils/colors.dart';
+import 'package:heads_up/Utils/text.dart';
 import 'package:heads_up/game.dart';
 import 'package:heads_up/homepage.dart';
+import 'package:heads_up/widgets/button.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class GameOver extends StatefulWidget {
   final List<dynamic> list;
@@ -22,14 +23,13 @@ class _GameOverState extends State<GameOver> {
   var score = 0;
   @override
   void initState() {
-    print(widget.list.length);
     getScore();
     super.initState();
   }
 
   void getScore() {
     for (var ele in widget.scoreMap.values) {
-      if (ele) {
+      if (ele == true) {
         score++;
       }
     }
@@ -44,70 +44,46 @@ class _GameOverState extends State<GameOver> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Game Over", style: Theme.of(context).textTheme.titleMedium),
-              Text("Your Score: $score",
-                  style: Theme.of(context).textTheme.titleSmall),
+              Text("Game Over", style: subtitleWhite),
+              Text("Your Score: $score", style: bodyLarge),
               Expanded(
-                  child: Center(
-                child: Wrap(
-                  children: List.generate(
-                    widget.scoreMap.length,
-                    (index) {
-                      return Container(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text(widget.list[index],
-                            style:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      color: widget.scoreMap[index]!
-                                          ? Colors.white
-                                          : Colors.grey,
-                                    )),
-                      );
-                    },
-                  ),
+                child: Center(
+                  child: ListView(children: [
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      children: List.generate(
+                        widget.scoreMap.length,
+                        (index) {
+                          return Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 1.w,
+                              vertical: 0.5.w,
+                            ),
+                            child: Text(
+                              widget.list[index],
+                              style: bodySmall.copyWith(
+                                color: widget.scoreMap[index] ?? false
+                                    ? Colors.white
+                                    : Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ]),
                 ),
-              )),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(15.0)),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => GamePage(type: widget.type),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Play Again",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              color: primary,
-                            ),
-                      ),
+                    Button(
+                      text: "Play Again!",
+                      next: GamePage(type: widget.type),
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(15.0)),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Home(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Home",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: primary,
-                            ),
-                      ),
-                    )
+                    const Button(text: "Home", next: Home())
                   ],
                 ),
               )
