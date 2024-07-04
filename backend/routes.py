@@ -38,7 +38,7 @@ def getCricketers():
     if(request.args.__contains__("n")):
         n = int(request.args["n"])
     else:
-        n = 5
+        n = 10
     with open('cricketers.txt', "r", encoding='utf-8') as file:
         cricketersList = [line.strip() for line in file]
     random_cricketers = random.sample(cricketersList, n)
