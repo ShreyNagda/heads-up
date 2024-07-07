@@ -13,7 +13,7 @@ def getWords():
     if(request.args.__contains__("n")):
         n = int(request.args["n"])
     else:
-        n = 5
+        n = 10
     with open('objects.txt', "r", encoding='utf-8') as file:
         words_list = [line.strip() for line in file]
     random_words = random.sample(words_list, n)
@@ -25,7 +25,7 @@ def getMovies():
     if(request.args.__contains__("n")):
         n = int(request.args["n"])
     else:
-        n = 5
+        n = 10
     with open("movies.txt", "r", encoding="utf-8") as file:
         movies_list = [line.strip() for line in file]
     random_movies = random.sample(movies_list, n)

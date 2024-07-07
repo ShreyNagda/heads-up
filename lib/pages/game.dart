@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,8 +21,12 @@ class _GameState extends State<Game> {
   }
 
   Future<void> fetchData() async {
-    await http
+    var res = await http
         .get(Uri.parse("https://heads-up-jxhg.onrender.com/${widget.type}"));
+    print(jsonDecode(res.body)["value"]);
+    setState(() {
+      loading = false;
+    });
     print("Data Loaded");
   }
 
