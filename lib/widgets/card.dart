@@ -22,9 +22,14 @@ class CustomCard extends StatelessWidget {
         );
       },
       child: SizedBox(
-          width: 120,
-          height: 120,
-          child: Card(child: Center(child: Text(text)))),
+          height: MediaQuery.of(context).size.width / 5,
+          width: MediaQuery.of(context).size.width / 5,
+          child: Card(
+              child: Center(
+                  child: Text(
+            text,
+            style: const TextStyle(fontSize: 20),
+          )))),
     );
   }
 }

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:heads_up/utils/theme/theme_provider.dart';
 import 'package:heads_up/widgets/card.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +14,7 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           toolbarHeight: 80,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
@@ -26,21 +24,23 @@ class _HomeState extends State<Home> {
           elevation: 10,
           title: const Text(
             "H E A D S   U P",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Provider.of<ThemeProvider>(
-                  context,
-                  listen: false,
-                ).toggleTheme();
-              },
-              icon: Icon(
-                Provider.of<ThemeProvider>(context).isDarkMode
-                    ? Icons.light_mode_rounded
-                    : Icons.dark_mode_rounded,
-              ),
-            )
+          actions: const [
+            //Uncomment to implement dynamic theme
+            // IconButton(
+            //   onPressed: () {
+            //     Provider.of<ThemeProvider>(
+            //       context,
+            //       listen: false,
+            //     ).toggleTheme();
+            //   },
+            //   icon: Icon(
+            //     Provider.of<ThemeProvider>(context).isDarkMode
+            //         ? Icons.light_mode_rounded
+            //         : Icons.dark_mode_rounded,
+            //   ),
+            // )
           ],
         ),
         body: const Center(

@@ -6,11 +6,17 @@ import 'package:heads_up/pages/error.dart' as e;
 import 'package:heads_up/utils/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+late SharedPreferences prefs;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+  prefs = await SharedPreferences.getInstance();
+  if (!prefs.containsKey("dark")) {
+    prefs.setBool("dark", true);
+  }
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
@@ -36,20 +42,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   void checkApiStatus() {
-    http.get(Uri.parse("https://heads-up-jxhg.onrender.com/")).then((res) {
-      print(res);
-      if (res.statusCode == 200) {
-        setState(() {
-          loading = false;
-          error = null;
-        });
-      } else {
-        setState(() {
-          loading = false;
-          error = "An error occurred!\nTry Again Later";
-        });
-      }
-      // }else if(res.isRedirect)
+    http.get(Uri.parse("https://heads-up-jxhg.onrender.com/"));
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        loading = false;
+        error = null;
+      });
     });
   }
 
@@ -58,7 +56,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: loading == true
-          ? const Loading()
+          ? Loading(
+              text: "Fetching Data",
+            )
           : error != null
               ? e.Error(
                   error: error!,
