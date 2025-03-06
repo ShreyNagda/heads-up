@@ -9,6 +9,7 @@ ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
       backgroundColor: primary, iconTheme: IconThemeData(color: Colors.black)),
 );
+
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   progressIndicatorTheme: const ProgressIndicatorThemeData(color: primary),

@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:heads_up/main.dart';
 import 'package:heads_up/pages/game.dart';
+import 'package:heads_up/widgets/score_card.dart';
 
 class GameScore extends StatefulWidget {
   final Map<int, bool> score;
@@ -21,8 +20,6 @@ class GameScore extends StatefulWidget {
 class _GameScoreState extends State<GameScore> {
   int score = 0;
   Map<int, (String, bool)> scoreMap = {};
-  late Color correctColor;
-  late Color wrongColor;
 
   @override
   void initState() {
@@ -32,12 +29,7 @@ class _GameScoreState extends State<GameScore> {
         score++;
       }
     }
-    correctColor = prefs.get("dark")! == true
-        ? Colors.greenAccent.withOpacity(0.6)
-        : Colors.greenAccent;
-    wrongColor = prefs.get("dark")! == true
-        ? Colors.redAccent.withOpacity(0.6)
-        : Colors.redAccent;
+
     super.initState();
   }
 
@@ -55,32 +47,23 @@ class _GameScoreState extends State<GameScore> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  runAlignment: WrapAlignment.center,
-                  alignment: WrapAlignment.center,
-                  children: scoreMap.values
-                      .toList()
-                      .map(
-                        (ele) => Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: ele.$2 ? correctColor : wrongColor,
-                          ),
-                          child: Text(ele.$1),
-                        ),
-                      )
-                      .toList(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Wrap(
+                      spacing: 5,
+                      runSpacing: 5,
+                      runAlignment: WrapAlignment.center,
+                      alignment: WrapAlignment.center,
+                      children: scoreMap.values
+                          .toList()
+                          .map((ele) => ScoreCard(data: ele))
+                          .toList(),
+                    ),
+                  ),
                 ),
               ),
-              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
@@ -110,8 +93,8 @@ class _GameScoreState extends State<GameScore> {
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
+                          horizontal: 30,
+                          vertical: 15,
                         ),
                       ),
                       child: const Text("Home"),

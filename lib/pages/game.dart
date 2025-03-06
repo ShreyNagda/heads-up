@@ -12,6 +12,8 @@ import 'package:sensors_plus/sensors_plus.dart';
 // Import package
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 
+import 'package:flutter_haptic_feedback/flutter_haptic_feedback.dart';
+
 class Game extends StatefulWidget {
   final String type;
   const Game({super.key, required this.type});
@@ -22,12 +24,13 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   bool loading = true;
+  bool showPlaceOnForeheadScreen = false;
   bool startTimerFinished = false;
   List<String> words = [];
   int currentIndex = 0;
 
   double threshold = 6;
-  double resetThreshold = 0.7;
+  double resetThreshold = 1;
 
   String? status;
   bool tilted = false;
@@ -36,7 +39,7 @@ class _GameState extends State<Game> {
 
   late Timer timer;
   int startSeconds = 3;
-  int gameSeconds = 10;
+  int gameSeconds = 60;
 
   double z = 0;
   late StreamSubscription<AccelerometerEvent> _accelerometerSubscription;
@@ -69,46 +72,60 @@ class _GameState extends State<Game> {
       loading = false;
     });
     if (!startTimerFinished) {
-      AssetsAudioPlayer.newPlayer()
-          .open(Audio("assets/audios/countdown.wav"), autoStart: true);
-      Timer.periodic(const Duration(seconds: 1), (_) {
-        if (startSeconds > 1) {
-          setState(() {
-            startSeconds--;
-          });
-        } else {
-          setState(() {
-            startTimerFinished = true;
-          });
-          _.cancel();
-          timer = Timer.periodic(const Duration(seconds: 1), (_) {
-            if (gameSeconds > 1) {
-              gameSeconds--;
-            } else {
-              Vibrate.feedback(FeedbackType.heavy);
-              _accelerometerSubscription.cancel();
-              if (score[currentIndex] == null) {
-                score[currentIndex] = false;
-              }
-              List<String> temp = words.sublist(0, currentIndex + 1);
-              // send total words reached as parameter.
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => GameScore(
-                      score: score, wordsList: temp, type: widget.type),
-                ),
-              );
-              _.cancel();
-            }
-          });
-        }
-      });
+      if (z.abs() != 0) {
+        showPlaceOnForeheadScreen = true;
+      } else {
+        startLoadingTimer();
+      }
     }
+  }
+
+  void startLoadingTimer() {
+    Vibrate.feedback(FeedbackType.heavy);
+    AssetsAudioPlayer.newPlayer()
+        .open(Audio("assets/audios/countdown.wav"), autoStart: true);
+    Timer.periodic(const Duration(seconds: 1), (_) {
+      print("Loading $startSeconds");
+      if (startSeconds > 1) {
+        setState(() {
+          startSeconds--;
+        });
+      } else {
+        setState(() {
+          startTimerFinished = true;
+        });
+        _.cancel();
+        //Game Timer
+        timer = Timer.periodic(const Duration(seconds: 1), (_) {
+          if (gameSeconds > 1) {
+            setState(() {
+              gameSeconds--;
+            });
+          } else {
+            _.cancel();
+            Vibrate.feedback(FeedbackType.success);
+            _accelerometerSubscription.cancel();
+            if (score[currentIndex] == null) {
+              score[currentIndex] = false;
+            }
+            List<String> temp = words.sublist(0, currentIndex + 1);
+            // send total words reached as parameter.
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) =>
+                    GameScore(score: score, wordsList: temp, type: widget.type),
+              ),
+            );
+          }
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     _accelerometerSubscription.cancel();
+    timer.cancel();
     super.dispose();
   }
 
@@ -116,7 +133,7 @@ class _GameState extends State<Game> {
   Widget build(BuildContext context) {
     void accelerometer() {
       if (z.abs() > threshold && !tilted) {
-        Vibrate.feedback(FeedbackType.heavy);
+        if (startTimerFinished) Vibrate.feedback(FeedbackType.heavy);
         tilted = true;
         if (currentIndex + 3 > words.length) {
           fetchData();
@@ -137,42 +154,64 @@ class _GameState extends State<Game> {
 
     if (loading) {
       return PopScope(canPop: false, child: Loading(text: "Loading"));
-    }
-
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        body: !startTimerFinished
-            ? Center(
-                child: Text(
-                  "$startSeconds",
-                  style: const TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
-            : Stack(
-                children: [
-                  Center(
-                    child: tilted
-                        ? ResultCard(status: status!)
-                        : GameCard(
-                            type: widget.type, data: words[currentIndex]),
-                  ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      "$gameSeconds",
-                      style: const TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
+    } else if (showPlaceOnForeheadScreen) {
+      if (z.abs() < resetThreshold) {
+        setState(() {
+          showPlaceOnForeheadScreen = false;
+        });
+        startLoadingTimer();
+      }
+      return const PopScope(
+        child: Scaffold(
+          body: Center(
+            child: Text(
+              "Place on Forehead",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
               ),
-      ),
-    );
+            ),
+          ),
+        ),
+      );
+    } else {
+      return PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: !startTimerFinished
+              ? Center(
+                  child: Text(
+                    "$startSeconds",
+                    style: const TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              : Stack(
+                  children: [
+                    Center(
+                      child: tilted
+                          ? ResultCard(status: status!)
+                          : GameCard(
+                              type: widget.type,
+                              data: words[currentIndex],
+                            ),
+                    ),
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        "$gameSeconds",
+                        style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+        ),
+      );
+    }
   }
 }

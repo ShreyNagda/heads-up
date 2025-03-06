@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:heads_up/pages/game.dart';
 
 class CustomCard extends StatelessWidget {
@@ -12,7 +13,8 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
+        await Vibrate.vibrate();
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => Game(
